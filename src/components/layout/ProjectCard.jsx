@@ -41,7 +41,7 @@ const ProjectCard = ({ project, variant = "landscape", feature = false }) => {
                 className="absolute inset-0 h-full w-full object-cover"
               />
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-900/40 via-slate-900 to-teal-900/30" />
+              <div className="absolute inset-0 bg-linear-to-br from-violet-900/40 via-slate-900 to-teal-900/30" />
             )}
 
             {/* Play affordance */}

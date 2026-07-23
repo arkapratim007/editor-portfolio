@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 
 /**
- * Tracks which section is currently in view and returns its id.
- *
- * @param {string[]} sectionIds - ids of the sections to watch, in page order
- * @param {object} options
- * @param {string} options.rootMargin - shrinks/shifts the observer viewport.
- *   Default triggers a section as "active" once it crosses a line ~20% down
- *   the screen, and stops watching once it's 40% past the bottom — this
- *   keeps short sections from getting skipped and feels right for a navbar.
- * @returns {string} the id of the currently active section
+ 
+ @param {string[]} sectionIds
+ @param {object} options
+ @param {number} options.offset
+ @returns {string} 
  */
-export function useScrollSpy(sectionIds, { rootMargin = "-20% 0px -40% 0px" } = {}) {
+export function useScrollSpy(sectionIds, { offset = 120 } = {}) {
   const [activeId, setActiveId] = useState(sectionIds[0]);
 
   useEffect(() => {
@@ -21,24 +17,36 @@ export function useScrollSpy(sectionIds, { rootMargin = "-20% 0px -40% 0px" } = 
 
     if (elements.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting);
+    const updateActive = () => {
+      const scrollLine = window.scrollY + offset;
 
-        if (visible.length > 0) {
-          const topMost = visible.reduce((a, b) =>
-            a.boundingClientRect.top < b.boundingClientRect.top ? a : b
-          );
-          setActiveId(topMost.target.id);
+      let current = elements[0].id;
+      for (const el of elements) {
+        if (el.offsetTop <= scrollLine) {
+          current = el.id;
+        } else {
+          break;
         }
-      },
-      { rootMargin, threshold: 0 }
-    );
+      }
 
-    elements.forEach((el) => observer.observe(el));
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) {
+        current = elements[elements.length - 1].id;
+      }
 
-    return () => observer.disconnect();
-  }, [sectionIds, rootMargin]);
+      setActiveId(current);
+    };
+
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+
+    return () => {
+      window.removeEventListener("scroll", updateActive);
+      window.removeEventListener("resize", updateActive);
+    };
+  }, [sectionIds, offset]);
 
   return activeId;
 }

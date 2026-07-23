@@ -26,11 +26,11 @@ const Contact = () => {
   ];
 
   return (
-    <div id= "contact" className="min-h-screen w-full bg-black bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:40px_40px] font-sans text-white flex items-center justify-center p-4 md:p-6">
+    <div id= "contact" className="min-h-screen w-full bg-black bg-[radial-gradient(#3b82f6_1px,transparent_1px)] bg-size-[40px_40px] font-sans text-white flex items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-6xl bg-slate-900/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-700/50 overflow-hidden grid grid-cols-1 lg:grid-cols-5">
         {/* Left side – Brand + Social */}
-        <div className="lg:col-span-2 p-8 md:p-10 flex flex-col justify-between bg-linear-to-br from-slate-900/80 to-slate-950/80 relative overflow-hidden">
-          <div className="absolute -top-32 -right-32 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="lg:col-span-2 p-8 md:p-10 flex flex-col justify-between bg-transparent">
+          <div className="absolute -top-32 -right-32 w-64 h-64 " />
           <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10">
