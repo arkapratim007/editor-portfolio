@@ -41,7 +41,13 @@ const WorkCategorySection = ({ slug, onSelectProject }) => {
 
       <div className="max-w-6xl mx-auto">
         <div className="mb-14 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">{category.label}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">
+            <span className="text-white">
+              {category.label.split(' ')[0]}
+            </span>
+              <span className="text-blue-500">
+              {' '}{category.label.split(' ').slice(1).join(' ')}
+            </span></h2>
           <p className="mt-3 text-slate-400">{category.tagline}</p>
         </div>
 

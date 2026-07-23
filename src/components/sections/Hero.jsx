@@ -36,7 +36,7 @@ const Hero = () => {
           {/* Eyebrow pill */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-slate-300 backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-teal-300 animate-pulse" />
-            Now booking projects for 2026
+            Specialized In FLow Edits
           </div>
 
           {/* Headline — the main scale jump */}

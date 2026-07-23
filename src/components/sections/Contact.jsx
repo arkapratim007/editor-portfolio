@@ -9,13 +9,13 @@ const Contact = () => {
       icon: Mail,
       label: "Direct Mail",
       href: "mailto:contact@souledits.gg",
-      handle: "contact@souledits.gg",
+      handle: "souledits.gg@gmail.com",
     },
     {
       icon: MessageCircle,
-      label: "Discord Server",
-      href: "https://discord.gg/souledits",
-      handle: "discord.gg/souledits",
+      label: "Discord",
+      href: "https://discord.com/users/s0ulkillerop",
+      handle: "discord.gg/s0ulkillerop",
     },
     {
       icon: User,
@@ -26,7 +26,7 @@ const Contact = () => {
   ];
 
   return (
-    <div id= "contact" className="min-h-screen w-full bg-[url('/soul-bg.png')] bg-cover bg-position-[70%_center] font-sans text-white flex items-center justify-center p-4 md:p-6">
+    <div id= "contact" className="min-h-screen w-full bg-black bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:40px_40px] font-sans text-white flex items-center justify-center p-4 md:p-6">
       <div className="w-full max-w-6xl bg-slate-900/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-700/50 overflow-hidden grid grid-cols-1 lg:grid-cols-5">
         {/* Left side – Brand + Social */}
         <div className="lg:col-span-2 p-8 md:p-10 flex flex-col justify-between bg-linear-to-br from-slate-900/80 to-slate-950/80 relative overflow-hidden">
@@ -34,10 +34,7 @@ const Contact = () => {
           <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-xs font-medium text-purple-300 mb-6">
-              <Sparkles size={14} className="text-purple-400" />
-              Currently accepting new clients
-            </div>
+            
 
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
               <span className="bg-linear-to-r from-purple-400 via-pink-400 to-amber-400 bg-clip-text text-transparent">

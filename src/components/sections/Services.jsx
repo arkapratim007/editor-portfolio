@@ -31,7 +31,7 @@ const pricingData = [
   },
   {
     title: 'Premium Montages',
-    price: '1,499',
+    price: '1,199',
     description: '1+ min long Smooth Velocity EDIT with High tier SFX and Quality Color Grading.',
     features: [
       'Custom Intro & Outro',
@@ -52,7 +52,7 @@ export default function Pricing() {
       </div>
       <div className="max-w-6xl mx-auto text-center">
         {/* Header */}
-        <h2 className="text-4xl md:text-5xl font-bold mb-3 bg-linear-to-r from-teal-300 to-violet-400 bg-clip-text text-transparent">
+        <h2 className="text-4xl md:text-5xl font-bold mb-3 text-white bg-clip-text">
           Services
         </h2>
         <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-14">

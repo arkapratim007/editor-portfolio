@@ -1,14 +1,14 @@
-import { Code, Handshake, Mail } from "lucide-react";
+import { CircleUser, Handshake, Mail,} from "lucide-react";
 
 const links = [
-  { name: "Home", href: "#" },
-  { name: "About", href: "#" },
-  { name: "Projects", href: "#" },
-  { name: "Contact", href: "#" },
+  { name: "Home", target: "home" },
+  { name: "About", target: "about" },
+  { name: "Projects", target: "work" },
+  { name: "Contact", target: "contact" },
 ];
 
 const socials = [
-  { icon: Code, href: "#" },
+  { icon: CircleUser, href: "#" },
   { icon: Handshake, href: "#" },
   { icon: Mail, href: "#" },
 ];
@@ -36,7 +36,7 @@ export default function Footer() {
             {links.map((link) => (
               <a
                 key={link.name}
-                href={link.href}
+                href={`#${link.target}`}
                 className="text-sm text-zinc-400 transition duration-300 hover:text-white"
               >
                 {link.name}
@@ -67,7 +67,7 @@ export default function Footer() {
           </p>
 
           <p className="mt-3 md:mt-0">
-            Made with ❤️ using React & Tailwind CSS
+            Made by S0ULKILLER
           </p>
 
         </div>

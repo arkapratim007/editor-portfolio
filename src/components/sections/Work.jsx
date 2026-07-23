@@ -44,11 +44,8 @@ const Work = () => {
       <div className="mx-auto max-w-6xl px-6">
         {/* Header */}
         <div className="mb-16 text-center">
-          <span className="inline-block text-sm font-semibold uppercase tracking-[0.14em] text-teal-400">
-            ● Selected Work
-          </span>
           <h2 className="mt-3 text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            Video Portfolio
+            Video <span className="text-blue-500">Portfolio</span>
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-slate-400">
             Explore my work across different formats — each crafted with

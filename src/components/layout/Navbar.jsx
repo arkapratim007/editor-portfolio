@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NAV_ITEMS } from '../../data/navItems';
 import { useScrollSpy } from "../../hooks/useScrollSpy";
+import mylogo from "../../assets/soul.svg";
 
 
 export default function GlassNavbar() {
@@ -50,7 +51,7 @@ export default function GlassNavbar() {
     flex items-center gap-3 rounded-[20px] border border-white/10
     px-4 py-3 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300
     shadow-[0_8px_32px_rgba(0,0,0,0.35)]
-    ${scrolled ? "bg-white/[0.09]" : "bg-white/[0.055]"}`}
+    ${scrolled ? "bg-white/9" : "bg-white/5.5"}`}
 >
   {/* Brand (left) */}
   <a
@@ -61,9 +62,7 @@ export default function GlassNavbar() {
     }}
     className="flex items-center gap-2.5 font-semibold text-[18px] tracking-wide text-slate-50 whitespace-nowrap"
   >
-    <span className="relative h-[30px] w-[30px] shrink-0 rounded-[9px] bg-gradient-to-br from-teal-300 to-violet-400 shadow-[0_0_18px_rgba(94,234,212,0.45)]">
-      <span className="absolute inset-[7px] rounded-[5px] bg-[#060911]/85" />
-    </span>
+    <img src={mylogo} alt="" className="h-12 w-auto" />
     SOUL EDITS
   </a>
 
