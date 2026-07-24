@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Play } from "lucide-react";
 import { useOEmbed } from "../../hooks/Embedded";
-import { getEmbedUrl } from "../../lib/video";
+import { getEmbedUrl } from "../../lib/Video";
 
 /**
  * variant: "portrait" (9:16, short form) | "landscape" (16:9, montages/long form)
