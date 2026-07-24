@@ -10,7 +10,7 @@ const links = [
 const socials = [
   { icon: CircleUser, href: "https://www.instagram.com/ig_s0ulkiller/" },
   { icon: Handshake, href: "#" },
-  { icon: Mail, href: "souledits.gg@gmail.com" },
+  { icon: Mail, href: "mailto:souledits.gg@gmail.com" },
 ];
 
 export default function Footer() {

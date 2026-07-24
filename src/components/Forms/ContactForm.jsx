@@ -338,7 +338,7 @@ const ContactForm = ({ prefillService }) => {
           className={`w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 ${
             isSubmitting
               ? "bg-slate-700/50 text-slate-400 cursor-not-allowed"
-              : "bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 active:scale-[0.98]"
+              : "bg-linear-to-r from-teal-500 to-violet-400 hover:from-violet-500 hover:to-purle-500 text-white shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 active:scale-[0.98]"
           }`}
         >
           {isSubmitting ? (
