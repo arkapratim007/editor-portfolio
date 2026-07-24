@@ -128,3 +128,6 @@
     @apply font-sans overflow-x-hidden;
     }
 }
+#root {
+  overflow-x: hidden;
+}
