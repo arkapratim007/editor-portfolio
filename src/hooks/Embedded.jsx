@@ -1,15 +1,4 @@
 import { useEffect, useState } from "react";
-
-/**
- * Fetches the real title + thumbnail for a project directly from
- * YouTube/Vimeo's oEmbed endpoints — no API key needed for either.
- *
- * Falls back to project.title / the gradient placeholder while loading,
- * or permanently if the fetch fails (e.g. offline, video deleted/private).
- *
- * Usage in ProjectCard:
- *   const { title, thumbnail, loading } = useOEmbed(project);
- */
 export function useOEmbed(project) {
   const [data, setData] = useState({
     title: project.title, // manual title used until/unless the fetch succeeds
