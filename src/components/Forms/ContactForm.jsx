@@ -1,5 +1,6 @@
 // src/components/ContactForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import emailjs from '@emailjs/browser';
 import {
   User,
   AtSign,
@@ -11,7 +12,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-const ContactForm = () => {
+const ContactForm = ({ prefillService }) => {
   // ─── State ──────────────────────────────────────────
   const [formData, setFormData] = useState({
     name: "",
@@ -28,14 +29,18 @@ const ContactForm = () => {
   const [submitStatus, setSubmitStatus] = useState("idle"); // "idle" | "success" | "error"
   const [submitMessage, setSubmitMessage] = useState("");
 
+  useEffect(() => {
+  if (prefillService) {
+    setFormData((prev) => ({ ...prev, service: prefillService }));
+  }
+}, [prefillService]);
+
   // ─── Service & platform options ─────────────────────
   const serviceOptions = [
-    "Video Editing",
-    "Motion Graphics",
-    "Color Grading",
-    "Sound Design",
-    "Full Production",
-    "Consulting",
+    "Short Form",
+    "Long Form",
+    "Premium Montages",
+    "Custom Package",
     "Other",
   ];
 
@@ -43,8 +48,6 @@ const ContactForm = () => {
     "YouTube",
     "TikTok",
     "Instagram Reels",
-    "Twitch",
-    "Vimeo",
     "Other",
   ];
 
@@ -77,65 +80,57 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!validate()) return;
+  if (!validate()) return;
 
-    setIsSubmitting(true);
-    setSubmitStatus("idle");
+  setIsSubmitting(true);
+  setSubmitStatus("idle");
 
-    try {
-      // ─── EmailJS Integration ──────────────────────
-      // (Replace with your actual credentials)
-      // const serviceId = "YOUR_SERVICE_ID";
-      // const templateId = "YOUR_TEMPLATE_ID";
-      // const publicKey = "YOUR_PUBLIC_KEY";
-      // const templateParams = {
-      //   from_name: formData.name,
-      //   from_email: formData.email,
-      //   phone: formData.phone,
-      //   brand: formData.brand || "Not specified",
-      //   service: formData.service || "Not specified",
-      //   platform: formData.platform || "Not specified",
-      //   project_details: formData.projectDetails,
-      // };
-      // await emailjs.send(serviceId, templateId, templateParams, publicKey);
+  try {
+    // ─── EmailJS Integration ──────────────────────
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-      // ─── Alternative: Fetch to your own backend ──
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
-      // if (!response.ok) throw new Error('Failed to send');
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      brand: formData.brand || "Not specified",
+      service: formData.service || "Not specified",
+      platform: formData.platform || "Not specified",
+      project_details: formData.projectDetails,
+    };
 
-      // ─── Demo: Simulate API call ──────────────────
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+    // Send the email
+    const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+    console.log('SUCCESS!', response.text);
 
-      setSubmitStatus("success");
-      setSubmitMessage(
-        "✓ Your message has been sent! We'll get back to you within 24 hours."
-      );
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        brand: "",
-        service: "",
-        platform: "",
-        projectDetails: "",
-      });
-    } catch (error) {
-      setSubmitStatus("error");
-      setSubmitMessage(
-        "✗ Something went wrong. Please try again or reach out directly on Discord."
-      );
-      console.error("Form submission error:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+    // ─── Success ──────────────────────────────────
+    setSubmitStatus("success");
+    setSubmitMessage(
+      "✓ Your message has been sent! We'll get back to you within 24 hours."
+    );
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      brand: "",
+      service: "",
+      platform: "",
+      projectDetails: "",
+    });
+  } catch (error) {
+    console.error('Form submission error:', error);
+    setSubmitStatus("error");
+    setSubmitMessage(
+      "✗ Something went wrong. Please try again or reach out directly on Discord."
+    );
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   // ─── Render ──────────────────────────────────────────
   return (
@@ -304,7 +299,7 @@ const ContactForm = () => {
               onChange={handleChange}
               rows={4}
               placeholder="Describe your vision, timeline, and budget..."
-              className={`w-full pl-9 pr-4 py-2.5 bg-slate-800/60 border rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all duration-200 resize-y min-h-[100px] ${
+              className={`w-full pl-9 pr-4 py-2.5 bg-slate-800/60 border rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all duration-200 resize-y min-h-25 ${
                 errors.projectDetails
                   ? "border-rose-500/50 focus:ring-rose-500/30"
                   : "border-slate-700/50 focus:ring-purple-500/30 focus:border-purple-500/50"
@@ -328,9 +323,9 @@ const ContactForm = () => {
             }`}
           >
             {submitStatus === "success" ? (
-              <CheckCircle size={18} className="flex-shrink-0 mt-0.5" />
+              <CheckCircle size={18} className="shrink-0 mt-0.5" />
             ) : (
-              <AlertCircle size={18} className="flex-shrink-0 mt-0.5" />
+              <AlertCircle size={18} className="shrink-0 mt-0.5" />
             )}
             <span>{submitMessage}</span>
           </div>
@@ -343,7 +338,7 @@ const ContactForm = () => {
           className={`w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 ${
             isSubmitting
               ? "bg-slate-700/50 text-slate-400 cursor-not-allowed"
-              : "bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 active:scale-[0.98]"
+              : "bg-linear-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 active:scale-[0.98]"
           }`}
         >
           {isSubmitting ? (

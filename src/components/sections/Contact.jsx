@@ -8,7 +8,7 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Direct Mail",
-      href: "mailto:contact@souledits.gg",
+      href: "mailto:souledits.gg@gmail.com",
       handle: "souledits.gg@gmail.com",
     },
     {
@@ -49,8 +49,7 @@ const Contact = () => {
             </h1>
 
             <p className="mt-4 text-slate-300 text-sm md:text-base max-w-sm leading-relaxed">
-              Currently accepting new clients for ongoing retainers and large-scale
-              documentary projects. Drop a line below or reach out directly on Discord
+              Currently accepting orders for shorts and long projects. Drop a line below or reach out directly on Discord
               for the fastest response.
             </p>
 

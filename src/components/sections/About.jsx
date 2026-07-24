@@ -29,11 +29,10 @@ function About() {
               storytelling, & immersive visuals. Whether it's crafting adrenaline-pumping  montages, or engaging content for creators, I thrive on creating top notch content. 
             </p>
             
-            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+            <p className="text-gray-200 text-lg leading-relaxed mb-6">
               I specialize in creating high-quality edits that engage gaming communities
             </p>
 
-            {/* Optional Call to Action button */}
             <div className="flex justify-center lg:justify-start">
               <button onClick={()=>
                     document.getElementById("contact")?.scrollIntoView({behavior:"smooth"})}

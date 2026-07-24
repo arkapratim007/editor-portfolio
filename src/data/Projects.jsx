@@ -1,5 +1,8 @@
 // Central data source — the Work overview, category pages, and VideoModal
 // all read from this one file. Add a new project = add one object here.
+import longthumb from "../assets/thumbs/thumblong.jpg"
+import shortthumb from "../assets/thumbs/thumbshort.jpg"
+import prthumb from "../assets/thumbs/prthumb.jpg"
 
 export const CATEGORIES = [
   {
@@ -8,6 +11,7 @@ export const CATEGORIES = [
     tagline: "Cinematic edits built for impact.",
     aspect: "landscape", // 16:9 feature cards
     playlistUrl: "https://youtube.com/playlist?list=PLNM8OXtRoBsUm73wCEYN4V_Z38S4h1wG4&si=pl0OoxZOlLViZ9Hw",
+    previewImage: prthumb,
   },
   {
     slug: "short-form",
@@ -15,6 +19,8 @@ export const CATEGORIES = [
     tagline: "Reels, TikToks, and shorts that hook fast.",
     aspect: "portrait", // 9:16 grid cards
     playlistUrl: "https://www.youtube.com/playlist?list=REPLACE_WITH_SHORTS_PLAYLIST_ID",
+    previewImage: shortthumb,
+
   },
   {
     slug: "long-form",
@@ -22,6 +28,7 @@ export const CATEGORIES = [
     tagline: "Full narrative edits — docs, YouTube, vlogs.",
     aspect: "landscape", // 16:9 standard grid
     playlistUrl: "https://www.youtube.com/playlist?list=REPLACE_WITH_LONGFORM_PLAYLIST_ID",
+    previewImage: longthumb,
   },
 ];
 
