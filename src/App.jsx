@@ -7,7 +7,7 @@ import WorkCategorySection from "./components/sections/WorkCategory";
 import About from "./components/sections/About";
 import Services from "./components/sections/Services";
 import Contact from "./components/sections/Contact";
-import { CATEGORIES } from "./data/projects";
+import { CATEGORIES } from "./data/Projects";
 
 export default function App() {
   return (
