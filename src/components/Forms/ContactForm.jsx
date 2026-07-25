@@ -335,20 +335,20 @@ const ContactForm = ({ prefillService }) => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className={`w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 ${
+          className={`w-full flex items-center justify-center gap-2 py-4 px-6 font-black text-sm uppercase tracking-widest transition-all duration-75 rounded-2xl border-2 ${
             isSubmitting
-              ? "bg-slate-700/50 text-slate-400 cursor-not-allowed"
-              : "bg-linear-to-r from-teal-500 to-violet-400 hover:from-violet-500 hover:to-purle-500 text-white shadow-lg shadow-purple-600/20 hover:shadow-purple-600/40 active:scale-[0.98]"
+              ? "bg-[#1a1633] border-[#ff007f]/30 text-slate-500 cursor-not-allowed shadow-none"
+              : "bg-[#facc15] border-black text-black shadow-[6px_6px_0px_0px_#ff007f] hover:shadow-[2px_2px_0px_0px_#ff007f] hover:translate-x-1 hover:translate-y-1 active:translate-x-2 active:translate-y-2"
           }`}
         >
           {isSubmitting ? (
             <>
-              <span className="inline-block w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full animate-spin" />
-              Sending...
+              <span className="inline-block w-4 h-4 border-2 border-[#ff007f] border-t-transparent rounded-full animate-spin" />
+                <span className="text-slate-400">Sending...</span>
             </>
           ) : (
             <>
-              <Send size={18} />
+              <Send size={18} className="text-black" />
               Send Transmission
             </>
           )}

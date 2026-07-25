@@ -3,7 +3,6 @@ import { NAV_ITEMS } from '../../data/navItems';
 import { useScrollSpy } from "../../hooks/useScrollSpy";
 import mylogo from "../../assets/soul.svg";
 
-
 export default function GlassNavbar() {
   const active = useScrollSpy(NAV_ITEMS.map((item) => item.target));
   const [menuOpen, setMenuOpen] = useState(false);
@@ -39,111 +38,117 @@ export default function GlassNavbar() {
   }, []);
 
   const handleNavClick = (target) => {
-  setMenuOpen(false);
-  document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
-};
+    setMenuOpen(false);
+    document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <>
-
+      {/* MAIN NAVBAR  */}
       <nav
-  className={`fixed top-5 left-1/2 z-[100] w-[min(920px,calc(100%-32px))] -translate-x-1/2
-    flex items-center gap-3 rounded-[20px] border border-white/10
-    px-4 py-3 backdrop-blur-xl backdrop-saturate-150 transition-all duration-300
-    shadow-[0_8px_32px_rgba(0,0,0,0.35)]
-    ${scrolled ? "bg-white/9" : "bg-white/5.5"}`}
->
-  {/* Brand (left) */}
-  <a
-    href="#home"
-    onClick={(e) => {
-      e.preventDefault();
-      handleNavClick("home");
-    }}
-    className="flex items-center gap-2.5 font-semibold text-[18px] tracking-wide text-slate-50 whitespace-nowrap"
-  >
-    <img src={mylogo} alt="" className="h-12 w-auto" />
-    SOUL EDITS
-  </a>
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-200
+          ${scrolled 
+            ? "bg-[#0f0c29] border-b-2 border-[#facc15]/60 shadow-[0_8px_32px_rgba(0,0,0,0.8)]" 
+            : "bg-[#0f0c29]/80 border-b border-[#facc15]/20"
+          }
+          flex items-center justify-between px-6 md:px-12 py-3`}
+      >
+        {/* Brand */}
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick("home");
+          }}
+          className="flex items-center gap-2.5 font-black text-xl tracking-tight text-white whitespace-nowrap"
+        >
+          <img src={mylogo} alt="" className="h-10 w-auto" />
+          <span className="text-[#facc15]">SOUL</span> EDITS
+        </a>
 
-  {/* Right group: links + CTA */}
-  <div className="ml-auto flex items-center gap-3">
-    {/* Desktop links */}
-    <ul
-      ref={navListRef}
-      className="relative hidden md:flex items-center gap-1 rounded-2xl p-1"
-    >
-      <div
-        className="absolute top-1 h-[calc(100%-8px)] rounded-[10px] bg-linear-to-r from-teal-300 to-violet-400
-          shadow-[0_4px_18px_rgba(94,234,212,0.35),0_0_22px_rgba(167,139,250,0.25)]
-          transition-all duration-500 ease-[cubic-bezier(0.65,0,0.35,1)]"
-        style={{ left: pillStyle.left, width: pillStyle.width }}
-      />
-      {NAV_ITEMS.map((item) => (
-        <li key={item.target} className="relative z-10">
+        {/* Right group: links + CTA */}
+        <div className="flex items-center gap-4">
+          {/* Desktop links */}
+          <ul
+            ref={navListRef}
+            className="relative hidden md:flex items-center gap-0.5 p-0.5"
+          >
+            {/* Sliding pill*/}
+            <div
+              className="absolute top-1 h-[calc(100%-8px)] rounded-none bg-[#ff007f]
+                shadow-[0_0_20px_rgba(255,0,127,0.5)]
+                transition-all duration-400 ease-[cubic-bezier(0.65,0,0.35,1)]"
+              style={{ left: pillStyle.left, width: pillStyle.width }}
+            />
+            {NAV_ITEMS.map((item) => (
+              <li key={item.target} className="relative z-10">
+                <a
+                  ref={(el) => (linkRefs.current[item.target] = el)}
+                  href={`#${item.target}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item.target);
+                  }}
+                  className={`relative inline-block px-5 py-2 text-sm font-bold uppercase tracking-wider
+                    transition-all duration-150
+                    ${
+                      active === item.target
+                        ? "text-black"
+                        : "text-slate-400 hover:text-white"
+                    }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA — brutalist button */}
           <a
-            ref={(el) => (linkRefs.current[item.target] = el)}
-            href={`#${item.target}`}
+            href="#contact"
             onClick={(e) => {
               e.preventDefault();
-              handleNavClick(item.target);
+              handleNavClick("contact");
             }}
-            className={`relative inline-block rounded-[10px] px-5 py-2 text-[14.5px] font-medium
-              transition-all duration-300 hover:-translate-y-0.5
-              ${
-                active === item.target
-                  ? "text-[#04140f] font-semibold"
-                  : "text-slate-400 hover:text-slate-50 hover:bg-white/5"
-              }`}
+            className="hidden md:inline-flex items-center gap-2 bg-[#facc15] text-black font-black px-6 py-2.5
+              border-2 border-black shadow-[4px_4px_0px_0px_#ff007f]
+              hover:shadow-[2px_2px_0px_0px_#ff007f] hover:translate-x-0.5 hover:translate-y-0.5
+              transition-all duration-75 rounded-none text-sm uppercase tracking-wider"
           >
-            {item.label}
+            Get started
           </a>
-        </li>
-      ))}
-    </ul>
 
-    {/* CTA – now inside the same group */}
-    <a
-      href="#contact"
-      onClick={(e) => {
-        e.preventDefault();
-        handleNavClick("contact");
-      }}
-      className="hidden md:inline-flex items-center gap-2 rounded-xl bg-linear-to-r from-teal-300 to-violet-400
-        px-4.5 py-2.5 text-sm font-semibold text-[#060911] whitespace-nowrap
-        shadow-[0_6px_20px_rgba(94,234,212,0.3)] transition-transform duration-300
-        hover:-translate-y-0.5 hover:scale-[1.03]"
-    >
-      Get started
-    </a>
-  </div>
+          {/* Hamburger (mobile) */}
+          <button
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+            className="relative h-10 w-10 shrink-0 border-2 border-[#facc15]/40 bg-[#0f0c29] md:hidden
+              hover:border-[#facc15] transition-colors duration-100"
+          >
+            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col gap-1.5">
+              <span className={`block h-0.5 w-5 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+              <span className={`block h-0.5 w-5 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
+              <span className={`block h-0.5 w-5 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            </span>
+          </button>
+        </div>
+      </nav>
 
-  {/* Hamburger (unchanged) */}
-  <button
-    aria-label="Toggle menu"
-    aria-expanded={menuOpen}
-    onClick={() => setMenuOpen((v) => !v)}
-    className="relative h-10 w-10 shrink-0 rounded-xl border border-white/10 bg-white/5 md:hidden"
-  >
-    {/* ... hamburger lines ... */}
-  </button>
-</nav>
-
-      {/* Scrim */}
+      {/* MOBILE MENU OVERLAY */}
       <div
         onClick={() => setMenuOpen(false)}
-        className={`fixed inset-0 z-[90] bg-[#03050a]/50 backdrop-blur-[2px] transition-opacity duration-300 md:hidden
+        className={`fixed inset-0 z-[90] bg-[#0f0c29]/80 backdrop-blur-sm transition-opacity duration-300 md:hidden
           ${menuOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"}`}
       />
 
-      {/* Mobile menu */}
+      {/*MOBILE MENU */}
       <div
-        className={`fixed top-[90px] left-1/2 z-[99] w-[min(420px,calc(100%-32px))] -translate-x-1/2 rounded-[18px]
-          border border-white/10 bg-white/[0.09] p-2.5 backdrop-blur-2xl backdrop-saturate-150
-          shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-300 md:hidden
-          ${menuOpen ? "opacity-100 translate-y-0 visible pointer-events-auto" : "opacity-0 -translate-y-3 invisible pointer-events-none"}`}
+        className={`fixed top-[72px] left-0 right-0 z-[99] bg-[#0f0c29] border-b-2 border-[#facc15]/30
+          transition-all duration-300 ease-out md:hidden
+          ${menuOpen ? "opacity-100 translate-y-0 visible pointer-events-auto" : "opacity-0 -translate-y-4 invisible pointer-events-none"}`}
       >
-        <ul className="flex flex-col gap-1">
+        <ul className="flex flex-col p-4 gap-1">
           {NAV_ITEMS.map((item, i) => (
             <li key={item.target}>
               <a
@@ -153,23 +158,35 @@ export default function GlassNavbar() {
                   handleNavClick(item.target);
                 }}
                 style={{ transitionDelay: menuOpen ? `${80 + i * 70}ms` : "0ms" }}
-                className={`flex items-center justify-between rounded-xl px-4 py-3.5 text-[15.5px] font-medium
-                  transition-all duration-300 ease-out
+                className={`flex items-center justify-between px-4 py-4 text-base font-bold uppercase tracking-wider
+                  transition-all duration-200
                   ${menuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}
                   ${
                     active === item.target
-                      ? "text-slate-50 bg-white/[0.07]"
-                      : "text-slate-400 hover:bg-white/5"
+                      ? "text-[#facc15] bg-[#ff007f]/10 border-l-4 border-[#ff007f]"
+                      : "text-slate-400 hover:text-white hover:bg-white/5"
                   }`}
               >
                 {item.label}
-                <span
-                  className={`h-[7px] w-[7px] rounded-full bg-linear-to-r from-teal-300 to-violet-400 transition-opacity duration-300
-                    ${active === item.target ? "opacity-100" : "opacity-0"}`}
-                />
+                {active === item.target && (
+                  <span className="h-2 w-2 bg-[#ff007f] rotate-45" />
+                )}
               </a>
             </li>
           ))}
+          {/* Mobile CTA inside menu */}
+          <li className="mt-2">
+            <a
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick("contact");
+              }}
+              className="block w-full text-center bg-[#facc15] text-black font-black px-4 py-4 border-2 border-black shadow-[4px_4px_0px_0px_#ff007f] hover:shadow-[2px_2px_0px_0px_#ff007f] hover:translate-x-0.5 hover:translate-y-0.5 transition-all duration-75 rounded-none uppercase tracking-wider"
+            >
+              Get started →
+            </a>
+          </li>
         </ul>
       </div>
     </>

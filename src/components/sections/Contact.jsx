@@ -86,21 +86,21 @@ const socials = [
 
 const Contact = () => {
   return (
-    <div id="contact" className="min-h-screen w-full bg-black bg-[radial-gradient(#3b82f6_1px,transparent_1px)] bg-size-[40px_40px] font-sans text-white flex items-center justify-center p-4 md:p-6">
-      <div className="w-full max-w-6xl bg-slate-900/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-slate-700/50 overflow-hidden grid grid-cols-1 lg:grid-cols-5">
+    <div id="contact" className="min-h-screen w-full bg-[#05070d] font-sans text-white flex items-center justify-center p-4 md:p-6">
+      <div className="w-full max-w-6xl bg-[#1a1633] border-2 border-[#ff007f] rounded-none overflow-hidden grid grid-cols-1 lg:grid-cols-5">
         
         {/* LEFT SIDE – Brand + Social */}
         <div className="lg:col-span-2 p-8 md:p-10 flex flex-col justify-between bg-transparent relative">
           <div className="absolute -top-32 -right-32 w-64 h-64" />
             <div className="relative z-10">
               <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-                <span className="text-blue-300">
+                <span className="text-blue-500">
                   Let's Build
                 </span>
                 <br />
                 <span className="text-white">Your Next</span>
                 <br />
-                <span className=" text-blue-500">
+                <span className=" text-yellow-500">
                   Viral Hit.
                 </span>
               </h1>
@@ -122,10 +122,10 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className="relative z-10 mt-8 pt-6 border-t border-slate-700/30">
-            <p className="text-xs text-slate-500 flex items-center gap-2">
-              <span/>
-              We'll get back to you within 24 hours
+          <div className="relative z-10 mt-8 pt-6 border-t border-[#ff007f]/30">
+            <p className="text-xs text-[#facc15] font-mono flex items-center gap-2">
+                
+              Guaranteed response within 24 hours. Or we edit your video for 50% off.
             </p>
           </div>
         </div>
