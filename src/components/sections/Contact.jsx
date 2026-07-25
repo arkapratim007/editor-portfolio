@@ -91,27 +91,24 @@ const Contact = () => {
         
         {/* LEFT SIDE – Brand + Social */}
         <div className="lg:col-span-2 p-8 md:p-10 flex flex-col justify-between bg-transparent relative">
-          {/* decorative blurs */}
           <div className="absolute -top-32 -right-32 w-64 h-64" />
-          <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="relative z-10">
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
+                <span className="text-blue-300">
+                  Let's Build
+                </span>
+                <br />
+                <span className="text-white">Your Next</span>
+                <br />
+                <span className=" text-blue-500">
+                  Viral Hit.
+                </span>
+              </h1>
 
-          <div className="relative z-10">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight">
-              <span className="bg-linear-to-r from-purple-400 via-pink-400 to-amber-400 bg-clip-text text-transparent">
-                Let's Build
-              </span>
-              <br />
-              <span className="text-white">Your Next</span>
-              <br />
-              <span className="bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Viral Hit.
-              </span>
-            </h1>
-
-            <p className="mt-4 text-slate-300 text-sm md:text-base max-w-sm leading-relaxed">
-              Currently accepting orders for shorts and long projects. Drop a line below or reach out directly on Discord
-              for the fastest response.
-            </p>
+              <p className="mt-4 text-slate-300 text-sm md:text-base max-w-sm leading-relaxed">
+                Currently accepting orders for shorts and long projects. Drop a line below or reach out directly on Discord
+                for the fastest response.
+              </p>
 
             {/* SOCIAL BUTTONS – modular grid */}
             <div className="mt-8">
@@ -127,7 +124,7 @@ const Contact = () => {
 
           <div className="relative z-10 mt-8 pt-6 border-t border-slate-700/30">
             <p className="text-xs text-slate-500 flex items-center gap-2">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span/>
               We'll get back to you within 24 hours
             </p>
           </div>
