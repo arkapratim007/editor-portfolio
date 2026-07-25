@@ -74,17 +74,17 @@ export default function Services() {
           {pricingData.map((card, idx) => (
             <div
               key={idx}
-              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 text-left transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(167,139,250,0.3)] hover:border-teal-300/50"
+              className="group relative bg-[#1a1633] border-2 border-[#ff007f]/30 p-8 text-left transition-all duration-75 hover:border-[#facc15] hover:-translate-y-1 rounded-none"
             >
               <div className="relative z-10">
                 <h3 className="text-2xl font-semibold mb-2">{card.title}</h3>
                 <p className="text-slate-300 text-sm leading-relaxed mb-4">
                   {card.description}
                 </p>
-
+                {/* Price */}
                 <div className="mb-4">
-                  <p>Starting From</p>
-                  <span className="text-4xl font-bold">₹{card.price}</span>
+                  <p className="text-xs text-slate-500 font-mono uppercase tracking-widest">Starting From</p>
+                  <span className="text-5xl font-black text-[#facc15]">₹{card.price}</span>
                   <span className="text-slate-400 text-sm ml-1">/ project</span>
                 </div>
 
@@ -97,10 +97,10 @@ export default function Services() {
                   ))}
                 </ul>
 
-                {/* ─── CTA Button (triggers modal) ──── */}
+                {/* CTA Button */}
                 <button
                   onClick={() => handleGetStarted(card.title)}
-                  className="w-full py-3 rounded-xl bg-linear-to-r from-teal-300 to-violet-400 text-[#0b1120] font-semibold active:scale-[1.03] active:shadow-[0_0_20px_rgba(94,234,212,0.4)]"
+                  className="w-full py-4 bg-[#facc15] text-black font-black border-2 border-black shadow-[6px_6px_0px_0px_#ff007f] hover:shadow-[2px_2px_0px_0px_#ff007f] hover:translate-x-1 hover:translate-y-1 transition-all duration-75 rounded-none"
                 >
                   {card.cta}
                 </button>

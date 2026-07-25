@@ -5,28 +5,28 @@ import { CATEGORIES } from "../../data/Projects";
 const THEMES = {
   montages: {
     icon: Film,
-    gradient: "from-cyan-500 to-teal-400",
-    accent: "text-cyan-400",
-    glow: "from-cyan-500/20 to-teal-400/10",
-    spotlight: "rgba(45,212,191,0.18)", // teal
+    gradient: "from-[#22d3ee] to-[#22d3ee]", // cyan
+    accent: "text-[#22d3ee]",
+    glow: "from-[#22d3ee]/20 to-[#22d3ee]/10",
+    spotlight: "rgba(34, 211, 238, 0.25)",
     format: "16:9",
   },
   "short-form": {
     icon: Zap,
-    gradient: "from-amber-500 to-orange-400",
-    accent: "text-amber-400",
-    glow: "from-amber-500/20 to-orange-400/10",
-    spotlight: "rgba(251,191,36,0.18)", // amber
+    gradient: "from-[#facc15] to-[#facc15]", // Solid acid yellow
+    accent: "text-[#facc15]",
+    glow: "from-[#facc15]/20 to-[#facc15]/10",
+    spotlight: "rgba(250, 204, 21, 0.25)",
     format: "9:16",
   },
   "long-form": {
-    icon: FileText,
-    gradient: "from-violet-500 to-purple-400",
-    accent: "text-violet-400",
-    glow: "from-violet-500/20 to-purple-400/10",
-    spotlight: "rgba(167,139,250,0.18)", // violet
-    format: "16:9",
-  },
+  icon: FileText,
+  gradient: "from-[#ccff00] to-[#ccff00]", // Pure highlighter yellow-green
+  accent: "text-[#ccff00]",
+  glow: "from-[#ccff00]/20 to-[#ccff00]/10",
+  spotlight: "rgba(204, 255, 0, 0.25)", // Radioactive green glow
+  format: "16:9",
+},
 };
 
 const WorkCard = ({ cat, index, onSelect }) => {
