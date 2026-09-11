@@ -123,7 +123,7 @@ export const PROJECTS = [
     client: "Gameplay",
     duration: "2 min",
     platform: "youtube",
-    videoId: "LFz3jPItiTE",
+    videoId: "rNtQvyOCtR4",
   },
 ];
 
