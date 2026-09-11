@@ -29,7 +29,7 @@ export function useOEmbed(project) {
 
         if (!cancelled) {
           setData({
-            title: json.title || project.title, // keep manual title if API gives nothing
+            title: json.title || project.title, // manual title if API gives nothing
             thumbnail: json.thumbnail_url || null,
             loading: false,
           });

@@ -1,10 +1,10 @@
 import { CircleUser, Handshake, Mail,} from "lucide-react";
 
 const links = [
-  { name: "Home", target: "home" },
-  { name: "About", target: "about" },
+  { name: "About Us", target: "about" },
+  { name: "Privacy Policy", target: "#" },
   { name: "Projects", target: "work" },
-  { name: "Contact", target: "contact" },
+  { name: "Contact  Us", target: "contact" },
 ];
 
 const socials = [
