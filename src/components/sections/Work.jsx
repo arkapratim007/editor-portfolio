@@ -5,28 +5,34 @@ import { CATEGORIES } from "../../data/Projects";
 const THEMES = {
   montages: {
     icon: Film,
-    gradient: "from-[#22d3ee] to-[#22d3ee]", // cyan
-    accent: "text-[#22d3ee]",
-    glow: "from-[#22d3ee]/20 to-[#22d3ee]/10",
-    spotlight: "rgba(34, 211, 238, 0.25)",
+    gradient: "from-[#ff007f] to-[#ff007f]", // Hot Pink
+    accent: "text-[#ff007f]",
+    border: "border-[#ff007f]",
+    shadow: "shadow-[6px_6px_0px_0px_#ff007f]",
+    hoverShadow: "hover:shadow-[2px_2px_0px_0px_#ff007f]",
+    spotlight: "rgba(255, 0, 127, 0.25)",
     format: "16:9",
   },
   "short-form": {
     icon: Zap,
-    gradient: "from-[#facc15] to-[#facc15]", // Solid acid yellow
+    gradient: "from-[#facc15] to-[#facc15]", // Acid Yellow
     accent: "text-[#facc15]",
-    glow: "from-[#facc15]/20 to-[#facc15]/10",
+    border: "border-[#facc15]",
+    shadow: "shadow-[6px_6px_0px_0px_#facc15]",
+    hoverShadow: "hover:shadow-[2px_2px_0px_0px_#facc15]",
     spotlight: "rgba(250, 204, 21, 0.25)",
     format: "9:16",
   },
   "long-form": {
-  icon: FileText,
-  gradient: "from-[#ccff00] to-[#ccff00]", // Pure highlighter yellow-green
-  accent: "text-[#ccff00]",
-  glow: "from-[#ccff00]/20 to-[#ccff00]/10",
-  spotlight: "rgba(204, 255, 0, 0.25)", // Radioactive green glow
-  format: "16:9",
-},
+    icon: FileText,
+    gradient: "from-[#ccff00] to-[#ccff00]", // Radioactive Lime
+    accent: "text-[#ccff00]",
+    border: "border-[#ccff00]",
+    shadow: "shadow-[6px_6px_0px_0px_#ccff00]",
+    hoverShadow: "hover:shadow-[2px_2px_0px_0px_#ccff00]",
+    spotlight: "rgba(204, 255, 0, 0.25)",
+    format: "16:9",
+  },
 };
 
 const WorkCard = ({ cat, index, onSelect }) => {
@@ -34,7 +40,6 @@ const WorkCard = ({ cat, index, onSelect }) => {
   const Icon = theme.icon;
   const cardRef = useRef(null);
 
-  // Mouse-tracking spotlight — updates CSS vars read by the glare layer below
   const handleMouseMove = (e) => {
     const card = cardRef.current;
     if (!card) return;
@@ -48,45 +53,50 @@ const WorkCard = ({ cat, index, onSelect }) => {
       ref={cardRef}
       onClick={() => onSelect(cat.slug)}
       onMouseMove={handleMouseMove}
-      className="group relative flex min-h-[26rem] flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 text-left transition-all duration-400 hover:scale-[1.02] hover:border-white/30 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-teal-400/50"
+      className={`group relative flex min-h-[26rem] flex-col justify-between overflow-hidden rounded-none
+        border-2 ${theme.border} bg-[#05070d] text-left
+        ${theme.shadow} ${theme.hoverShadow}
+        hover:translate-x-1 hover:translate-y-1
+        transition-all duration-75
+        focus:outline-none focus:ring-2 focus:ring-[#facc15]/50`}
     >
-      {/* Background preview image — dim + slight grayscale until hover, so the
-          card reads as "real footage" but doesn't fight the text on top */}
+      {/* Background preview image — dim until hover */}
       {cat.previewImage && (
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-25 grayscale transition-all duration-500 group-hover:opacity-45 group-hover:grayscale-0"
+          className="absolute inset-0 bg-cover bg-center opacity-20 grayscale transition-all duration-300 group-hover:opacity-40 group-hover:grayscale-0"
           style={{ backgroundImage: `url(${cat.previewImage})` }}
         />
       )}
 
-      {/* Gradient scrim so text stays readable regardless of the image underneath */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#05070d] via-[#05070d]/70 to-[#05070d]/20" />
+      {/* Scrim for readability — uses new deep indigo base */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0f0c29] via-[#0f0c29]/70 to-[#0f0c29]/20" />
 
-      {/* Mouse-tracking spotlight/glare — follows the cursor, only visible on hover */}
+      {/* Mouse-tracking spotlight */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
         style={{
           background: `radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), ${theme.spotlight}, transparent 70%)`,
         }}
       />
 
-      {/* Corner glow (kept from your version) */}
+      {/* Corner accent block — brutalist detail instead of soft glow */}
       <div
-        className={`absolute -right-24 -top-24 h-64 w-64 rounded-full bg-linear-to-br ${theme.glow} blur-3xl opacity-60 transition-opacity duration-700 group-hover:opacity-100`}
+        className={`absolute -right-16 -top-16 h-32 w-32 ${theme.accent.replace("text-", "bg-")} opacity-10 rotate-45`}
       />
 
       <div className="relative z-10 flex flex-col justify-between h-full p-7 md:p-8">
         {/* Top row: icon, format badge, index */}
         <div className="flex items-start justify-between">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/10 text-white backdrop-blur-sm transition-all duration-300 group-hover:bg-white/20">
+          {/* Icon box — sharp, bordered */}
+          <div className={`flex h-11 w-11 items-center justify-center rounded-none border-2 ${theme.border} bg-[#0f0c29] transition-colors duration-75 group-hover:bg-[#0f0c29]/50`}>
             <Icon size={20} className={theme.accent} />
           </div>
           <div className="flex items-center gap-3">
-            {/* Format chip — reinforces that each card is a distinct video shape */}
-            <span className="rounded-full border border-white/15 bg-black/30 px-2.5 py-1 font-mono text-[11px] text-white/60 backdrop-blur-sm">
+            {/* Format chip — sharp, mono */}
+            <span className={`rounded-none border-2 ${theme.border} bg-[#0f0c29] px-2.5 py-1 font-mono text-[11px] font-bold ${theme.accent}`}>
               {theme.format}
             </span>
-            <span className="font-mono text-sm text-white/30 transition-colors group-hover:text-white/50">
+            <span className={`font-mono text-sm font-bold ${theme.accent} opacity-60`}>
               {String(index + 1).padStart(2, "0")}
             </span>
           </div>
@@ -94,25 +104,23 @@ const WorkCard = ({ cat, index, onSelect }) => {
 
         {/* Bottom: text + CTA */}
         <div className="space-y-2">
-          <h3 className="text-2xl font-bold text-white">{cat.label}</h3>
-          <p className="text-sm text-slate-300 group-hover:text-slate-200">
+          <h3 className="text-2xl font-black text-white uppercase tracking-tight">{cat.label}</h3>
+          <p className="text-sm text-slate-300 leading-relaxed">
             {cat.tagline}
           </p>
-          <div
-            className={`inline-flex items-center gap-1.5 text-sm font-semibold ${theme.accent} transition-all duration-300 group-hover:gap-3`}
-          >
+          <div className={`inline-flex items-center gap-1.5 text-sm font-black uppercase tracking-widest ${theme.accent} transition-all duration-75 group-hover:gap-3`}>
             <span>Explore</span>
             <ArrowUpRight
               size={16}
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+              className="transition-transform duration-75 group-hover:translate-x-1 group-hover:-translate-y-1"
             />
           </div>
         </div>
       </div>
 
-      {/* Bottom accent line */}
+      {/* Bottom accent line — solid, snaps in on hover */}
       <div
-        className={`absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 bg-linear-to-r ${theme.gradient} transition-transform duration-500 group-hover:scale-x-100`}
+        className={`absolute bottom-0 left-0 right-0 h-1 scale-x-0 ${theme.accent.replace("text-", "bg-")} transition-transform duration-200 group-hover:scale-x-100 origin-left`}
       />
     </button>
   );
@@ -124,23 +132,27 @@ const Work = () => {
   };
 
   return (
-    <section id="work" className="relative scroll-mt-24 py-28 md:py-36">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[#05070d]">
-        <div className="absolute left-1/2 top-0 h-125 w-225 -translate-x-1/2 rounded-full bg-violet-600/10 blur-[120px]" />
+    <section id="work" className="relative scroll-mt-24 py-28 md:py-36 bg-[#05070d] overflow-hidden">
+      {/* Single subtle glow — pink, matching the theme */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-[#ff007f]/10 blur-[150px]" />
       </div>
 
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-16 text-center">
-          <h2 className="mt-3 text-4xl font-bold text-white md:text-5xl lg:text-6xl">
-            Video <span className="text-blue-500">Portfolio</span>
+          <span className="inline-block font-mono text-xs font-black text-[#ff007f] uppercase tracking-widest mb-4">
+            // My Work
+          </span>
+          <h2 className="text-4xl font-black text-white md:text-5xl lg:text-6xl uppercase tracking-tight">
+            Video <span className="text-[#facc15]">Portfolio</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-md text-sm text-slate-400">
+          <p className="mx-auto mt-4 max-w-md text-sm text-slate-400 font-mono">
             Explore my work across different formats — each crafted with
             intention and attention to detail.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {CATEGORIES.map((cat, index) => (
             <WorkCard key={cat.slug} cat={cat} index={index} onSelect={scrollTo} />
           ))}

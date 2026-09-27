@@ -58,7 +58,7 @@ export default function Services() {
   return (
     <section id='services' className="relative scroll-mt-24 py-28 md:py-36 text-white">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[#05070d]">
-        <div className="absolute left-1/2 top-0 h-125 w-225 -translate-x-1/2 rounded-full bg-violet-600/10 blur-[120px]" />
+       
       </div>
       <div className="max-w-6xl mx-auto text-center">
         {/* Header */}
