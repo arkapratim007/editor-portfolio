@@ -125,6 +125,15 @@ export const PROJECTS = [
     platform: "youtube",
     videoId: "rNtQvyOCtR4",
   },
+  {
+    id: "long-03",
+    title: "Coming Soon",
+    category: "long-form",
+    client: "Gameplay",
+    duration: "2 min",
+    platform: "youtube",
+    videoId: "rNtQvyOCtR4",
+  },
 ];
 
 export function getProjectsByCategory(slug) {
