@@ -40,12 +40,12 @@ const THEMES = {
 /* ─── Grid layouts for grid-based categories (long-form handled separately) ─── */
 const GRID_CLASSES = {
   montages: "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10",
-  "short-form": "grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8",
+  "short-form": "grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8",
 };
 
 const PREVIEW_LIMIT = {
   montages: 2,
-  "short-form": 4,
+  "short-form": 3,
   "long-form": 3,
 };
 

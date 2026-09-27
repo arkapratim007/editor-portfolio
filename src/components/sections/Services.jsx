@@ -62,12 +62,14 @@ export default function Services() {
       </div>
       <div className="max-w-6xl mx-auto text-center">
         {/* Header */}
-        <h2 className="text-4xl md:text-5xl font-bold mb-3 text-white bg-clip-text">
-          Services
-        </h2>
-        <p className="text-slate-400 text-lg max-w-2xl mx-auto mb-14">
-          Video production services with details and pricing
-        </p>
+        <div className="mb-16 text-center">
+          <h2 className="text-4xl font-black text-white md:text-5xl lg:text-6xl uppercase tracking-tight">
+            Services
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-sm text-slate-400 font-mono">
+            Video production services with details and pricing
+          </p>
+        </div>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

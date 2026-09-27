@@ -63,7 +63,7 @@ export const PROJECTS = [
     category: "short-form",
     client: "S0ULKILLER",
     platform: "youtube",
-    videoId: "zfM0oVO8Z1Q",
+    videoId: "hq-2mD93qu8",
   },
   {
     id: "short-02",
