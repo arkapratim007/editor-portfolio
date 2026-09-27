@@ -7,7 +7,6 @@ import ProjectCard from "../../components/layout/ProjectCard";
 const THEMES = {
   montages: {
     accent: "text-[#ff007f]",
-    border: "border-[#ff007f]",
     bg: "bg-[#ff007f]",
     shadow: "shadow-[8px_8px_0px_0px_#ff007f]",
     hoverShadow: "hover:shadow-[2px_2px_0px_0px_#ff007f]",
@@ -17,7 +16,6 @@ const THEMES = {
   },
   "short-form": {
     accent: "text-[#facc15]",
-    border: "border-[#facc15]",
     bg: "bg-[#facc15]",
     shadow: "shadow-[8px_8px_0px_0px_#facc15]",
     hoverShadow: "hover:shadow-[2px_2px_0px_0px_#facc15]",
@@ -27,7 +25,6 @@ const THEMES = {
   },
   "long-form": {
     accent: "text-[#ccff00]",
-    border: "border-[#ccff00]",
     bg: "bg-[#ccff00]",
     shadow: "shadow-[8px_8px_0px_0px_#ccff00]",
     hoverShadow: "hover:shadow-[2px_2px_0px_0px_#ccff00]",
@@ -37,15 +34,16 @@ const THEMES = {
   },
 };
 
-/* ─── Grid layouts for grid-based categories (long-form handled separately) ─── */
-const GRID_CLASSES = {
-  montages: "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10",
-  "short-form": "grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8",
+/* ─── Card widths per category ─── */
+const CARD_WIDTHS = {
+  montages:     "w-[88vw] sm:w-[75vw] md:w-[640px]",
+  "short-form": "w-[65vw] sm:w-[45vw] md:w-[320px]",
+  "long-form":  "w-[88vw] sm:w-[75vw] md:w-[580px]",
 };
 
 const PREVIEW_LIMIT = {
-  montages: 2,
-  "short-form": 3,
+  montages: 3,
+  "short-form": 4,
   "long-form": 3,
 };
 
@@ -58,17 +56,27 @@ const WorkCategorySection = ({ slug, onSelectProject }) => {
 
   const scrollRef = useRef(null);
 
-  /* ─── Mouse wheel → horizontal scroll (long-form only) ─── */
+  /* ─── Mouse wheel → horizontal scroll ─── */
   useEffect(() => {
-    if (slug !== "long-form") return;
     const el = scrollRef.current;
     if (!el) return;
 
     const onWheel = (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        el.scrollLeft += e.deltaY;
+      const canScrollLeft = el.scrollLeft > 0;
+      const canScrollRight = el.scrollLeft + el.clientWidth < el.scrollWidth - 1;
+      const scrollingDown = e.deltaY > 0;
+      const scrollingUp = e.deltaY < 0;
+
+      // At the edges → let the page scroll normally
+      if ((scrollingDown && !canScrollRight) || (scrollingUp && !canScrollLeft)) {
+        return;
       }
+
+      // Trackpad horizontal swipe → let browser handle it
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+
+      e.preventDefault();
+      el.scrollLeft += e.deltaY * 3;
     };
 
     el.addEventListener("wheel", onWheel, { passive: false });
@@ -83,20 +91,18 @@ const WorkCategorySection = ({ slug, onSelectProject }) => {
   return (
     <section
       id={slug}
-      className="relative scroll-mt-24 overflow-hidden bg-[#05070d] px-6 py-24 md:py-32"
+      className="relative scroll-mt-24 bg-[#05070d] px-6 py-24 md:py-32"
     >
       {/* ─── Subtle background glow ─── */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div
           className={`absolute left-1/2 top-0 h-[500px] w-[900px] -translate-x-1/2 rounded-full ${theme.glow} blur-[150px]`}
         />
       </div>
 
-      {/* ─── Wrapper: full-width for long-form, constrained for others ─── */}
-      <div className={slug === "long-form" ? "w-full" : "max-w-6xl mx-auto"}>
+      <div className="w-full">
         {/* ─── SECTION HEADER ─── */}
-        <div className={`mb-14 text-center ${slug === "long-form" ? "max-w-6xl mx-auto px-0" : ""}`}>
-          {/* Kicker badge */}
+        <div className="mb-14 text-center max-w-6xl mx-auto">
           <div className="mb-4 inline-flex items-center border-2 border-black bg-black/60 px-4 py-1.5">
             <span
               className={`font-mono text-[10px] md:text-xs font-black uppercase tracking-widest ${theme.accent}`}
@@ -116,11 +122,9 @@ const WorkCategorySection = ({ slug, onSelectProject }) => {
             {category.tagline}
           </p>
 
-          {slug === "long-form" && (
-            <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-slate-500">
-              ← Scroll to explore →
-            </p>
-          )}
+          <p className="mt-4 font-mono text-[10px] uppercase tracking-widest text-slate-500">
+            ← Scroll to explore →
+          </p>
         </div>
 
         {/* ─── PROJECTS ─── */}
@@ -128,47 +132,45 @@ const WorkCategorySection = ({ slug, onSelectProject }) => {
           <p className="text-center font-mono text-sm uppercase tracking-widest text-slate-500">
             // Projects coming soon
           </p>
-        ) : slug === "long-form" ? (
-          /* ─── LONG-FORM: horizontal reel, hidden scrollbar ─── */
-          <div
-            ref={scrollRef}
-            className="flex flex-nowrap gap-6 overflow-x-auto snap-x snap-mandatory pb-8
-              [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-          >
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className="snap-center shrink-0 w-[85vw] md:w-[560px]"
-              >
-                <ProjectCard
-                  project={project}
-                  variant={variant}
-                  feature={false}
-                  theme={theme}
-                  onClick={onSelectProject}
-                />
-              </div>
-            ))}
-          </div>
         ) : (
-          /* ─── OTHER CATEGORIES: standard grid ─── */
-          <div className={GRID_CLASSES[slug]}>
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                variant={variant}
-                feature={slug === "montages"}
-                theme={theme}
-                onClick={onSelectProject}
-              />
-            ))}
+          <div className="relative">
+            {/* Edge fades */}
+            <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-[#05070d] to-transparent z-20" />
+            <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-[#05070d] to-transparent z-20" />
+
+            {/* ─── OUTER: the scroll container ─── */}
+            <div
+              ref={scrollRef}
+              className="overflow-x-auto overflow-y-hidden pb-8
+                [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            >
+              {/* ─── INNER: the flex track (min-w-max forces overflow) ─── */}
+              <div className="flex flex-nowrap gap-6 md:gap-8 px-6 md:px-16 min-w-max">
+                {projects.map((project) => (
+                  <div
+                    key={project.id}
+                    className={`shrink-0 ${CARD_WIDTHS[slug]}`}
+                  >
+                    <ProjectCard
+                      project={project}
+                      variant={variant}
+                      feature={slug === "montages"}
+                      theme={theme}
+                      onClick={onSelectProject}
+                    />
+                  </div>
+                ))}
+
+                {/* End spacer */}
+                <div className="shrink-0 w-6 md:w-12" aria-hidden="true" />
+              </div>
+            </div>
           </div>
         )}
 
         {/* ─── VIEW MORE ─── */}
         {hasMore && category.playlistUrl && (
-          <div className="mt-14 flex justify-center">
+          <div className="mt-14 flex justify-center max-w-6xl mx-auto">
             <a
               href={category.playlistUrl}
               target="_blank"

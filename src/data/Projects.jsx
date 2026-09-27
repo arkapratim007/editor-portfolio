@@ -18,7 +18,7 @@ export const CATEGORIES = [
     label: "Short Form",
     tagline: "Reels, TikToks, and shorts that hook fast.",
     aspect: "portrait", // 9:16 grid cards
-    playlistUrl: "https://www.youtube.com/playlist?list=REPLACE_WITH_SHORTS_PLAYLIST_ID",
+    playlistUrl: "https://youtube.com/playlist?list=PLO1Hg4vQCm4k&si=oq8vh74lOMfW0PDn",
     previewImage: shortthumb,
 
   },
@@ -56,6 +56,14 @@ export const PROJECTS = [
     client: "S0ULKILLER",
     platform: "youtube",
     videoId: "XiHmyEFl8l0",
+  },
+   {
+    id: "montage-03",
+    title: "City Pulse",
+    category: "montages",
+    client: "S0ULKILLER",
+    platform: "youtube",
+    videoId: "JPjqS4oMrqoTRd_C",
   },
   {
     id: "short-01",
