@@ -10,7 +10,7 @@ import { getEmbedUrl } from "../../Lib/Video";
  */
 
 const ProjectCard = ({ project, variant = "landscape", feature = false, theme }) => {
-  const aspectClass = variant === "portrait" ? "aspect-[5/9]" : "aspect-video";
+  const aspectClass = variant === "portrait" ? "aspect-[9/16]" : "aspect-video";
   const { title, thumbnail } = useOEmbed(project);
   const [isPlaying, setIsPlaying] = useState(false);
   const embedUrl = getEmbedUrl(project);

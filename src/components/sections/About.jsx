@@ -8,9 +8,14 @@ function About() {
        
       <div className='container mx-auto px-4 md:px-6 mb-10'>
 
-        <h2 className="text-3xl md:text-5xl font-extrabold text-white text-center mb-10 md:mb-16">
-            About <span className="text-blue-500">Me</span>
-        </h2>
+        <div className="mb-16 text-center">
+          <span className="inline-block font-mono text-xs font-black text-[#ff007f] uppercase tracking-widest mb-4">
+            // About
+          </span>
+          <h2 className="text-4xl font-black text-white md:text-5xl lg:text-6xl uppercase tracking-tight">
+            About <span className="text-[#facc15]">Me</span>
+          </h2>
+        </div>
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 items-center justify-center">
 
           <div className="w-full lg:w-1/2 flex justify-center">
